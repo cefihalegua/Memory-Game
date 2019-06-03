@@ -3,3 +3,13 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
 }
+.card-row {
+    display: flex;
+}
+.card-front {
+    height: 300px;
+    width: 150px;
+}
+.card-back {
+    display: none;
+}
