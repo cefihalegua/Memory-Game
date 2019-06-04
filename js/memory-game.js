@@ -44,30 +44,70 @@ function distributeCards(chosenPictures) {
 choosingPictures();
 
 //flipping card when cliked on
-
+var openCardCount = 0;
+var card1Front;
+var card1Back;
+var card2Front;
+var card2Back;
+var clickConstant = true;
+var correctGuesses = 0;
 function flipCard() {
-    var card1Front;
-    var card1Back;
-    var card2Front;
-    var card2Back;
-    var openCardCount = 0;
-    if (openCardCount == 0) {
-        var divName = this.getAttribute("value");
-        var divImages = $("#" + divName + " img"); //1:back-side 0:front-side
-        divImages[1].setAttribute("class", "no-show"); //hide back-side
-        divImages[0].setAttribute("class", "card"); //show front-side
-        card1Front = divImages[0].id;
-        card1Back = divImages[1].id;
-        openCardCount = 1;
+    if (clickConstant) {
+        if (openCardCount == 0) {
+            var divName = this.getAttribute("value");
+            var divImages = $("#" + divName + " img"); //1:back-side 0:front-side
+            if (divImages[0].getAttribute("class") == "no-show") {
+                divImages[1].setAttribute("class", "no-show"); //hide back-side
+                divImages[0].setAttribute("class", "card"); //show front-side
+                card1Front = divImages[0].id;
+                card1Back = divImages[1].id;
+                openCardCount = 1;
+            }
+        }
+        else if (openCardCount == 1) {
+            var divName = this.getAttribute("value");
+            var divImages = $("#" + divName + " img"); //1:back-side 0:front-side
+            if (divImages[0].getAttribute("class") == "no-show") {
+                divImages[1].setAttribute("class", "no-show"); //hide back-side
+                divImages[0].setAttribute("class", "card"); //show front-side
+                card2Front = divImages[0].id;
+                card2Back = divImages[1].id;
+                openCardCount = 0;
+                compareOpenCards(card1Front, card1Back, card2Front, card2Back);
+            }
+        }
     }
-    else if (openCardCount == 1) {
-        var divName = this.getAttribute("value");
-        var divImages = $("#" + divName + " img"); //1:back-side 0:front-side
-        divImages[1].setAttribute("class", "no-show"); //hide back-side
-        divImages[0].setAttribute("class", "card"); //show front-side
-        card2Front = divImages[0].id;
-        card2Back = divImages[1].id;
-        openCardCount = 0;
-        compareOpenCards(card1Front, card1Back, card2Front, card2Back);
+}
+
+//comparing two open cards (if they are the same picture)
+function compareOpenCards(card1Front, card1Back, card2Front, card2Back) {
+    var firstCardImageSource = document.getElementById(card1Front).getAttribute("src");
+    var secondCardImageSource = document.getElementById(card2Front).getAttribute("src");
+    if (firstCardImageSource != secondCardImageSource) {
+        clickConstant = false;
+        setTimeout(noCorrectGuess, 1000);
+    }
+    else {
+        correctGuesses++;
+        if (correctGuesses == (numberOfCards / 2)) {
+            setTimeout(afterWinningTheGame, 1000);
+        }
+    }
+    function noCorrectGuess() {
+        document.getElementById(card1Front).setAttribute("class", "no-show");
+        document.getElementById(card2Front).setAttribute("class", "no-show");
+        document.getElementById(card1Back).setAttribute("class", "card");
+        document.getElementById(card2Back).setAttribute("class", "card");
+        clickConstant = true;
+    }
+    function afterWinningTheGame() {
+        window.confirm("Congratulations! Would you like to play again?");
+        if (confirm) {
+            for (let k = 0; k < numberOfCards; k++) {
+                $("#card" + (k + 1)).empty();
+
+            }
+            choosingPictures();
+        }
     }
 }
