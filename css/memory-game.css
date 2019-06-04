@@ -5,11 +5,16 @@ body {
 }
 .card-row {
     display: flex;
+    justify-content: center;
 }
-.card-front {
-    height: 300px;
-    width: 150px;
+.card {
+    height: 30vh;
+    max-width: 22vw;
+    margin: 5px;
 }
-.card-back {
+.show{
+    display: inline-block;
+}
+.no-show {
     display: none;
 }
