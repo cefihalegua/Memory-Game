@@ -2,6 +2,7 @@
 var numberOfCards = 12; //total number of cards in the board
 var numberOfPictures = 10; //number of different pictures to choose cards
 var pictures = [];
+$("#new-game-button").on("click", newGameButton);
 function choosingPictures() {
     var picturesArray = [];
     for (let i = 0; i < numberOfPictures; i++) {
@@ -101,13 +102,13 @@ function compareOpenCards(card1Front, card1Back, card2Front, card2Back) {
         clickConstant = true;
     }
     function afterWinningTheGame() {
-        window.confirm("Congratulations! Would you like to play again?");
-        if (confirm) {
-            for (let k = 0; k < numberOfCards; k++) {
-                $("#card" + (k + 1)).empty();
-
-            }
-            choosingPictures();
-        }
+        document.getElementById("button-for-modal").click();
+        document.getElementById("new-game-modal").addEventListener("click", newGameButton);
     }
+}
+function newGameButton() {
+    for (let k = 0; k < numberOfCards; k++) {
+        $("#card" + (k + 1)).empty();
+    }
+    choosingPictures();
 }

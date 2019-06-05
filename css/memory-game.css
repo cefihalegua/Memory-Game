@@ -8,7 +8,7 @@ body {
     justify-content: center;
 }
 .card {
-    height: 30vh;
+    height: 28vh;
     max-width: 22vw;
     margin: 5px;
 }
@@ -17,4 +17,11 @@ body {
 }
 .no-show {
     display: none;
+}
+#button-for-modal {
+    display: none;
+}
+#new-game-button {
+    margin-top: 10px;
+    margin-left: 10px;
 }
