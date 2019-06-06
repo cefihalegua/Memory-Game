@@ -14,7 +14,8 @@
 
 <body>
     <div id="header">
-        <button id="button-for-modal" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        <button id="button-for-modal" type="button" class="btn btn-primary" data-toggle="modal"
+            data-target="#exampleModal">
             <!-- hidden button just to trigger modal when the user wins, i kept it due to the fact that it is bootstrap -->
         </button>
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -31,12 +32,16 @@
                         You won, let's play another round and see if you can get even better!
                     </div>
                     <div class="modal-footer">
-                        <button id="new-game-modal" type="button" data-dismiss="modal" class="btn btn-primary">New Game</button>
+                        <button id="new-game-modal" type="button" data-dismiss="modal" class="btn btn-primary">New
+                            Game</button>
                     </div>
                 </div>
             </div>
         </div>
-        <button id="new-game-button" type="button" class="btn btn-success">New Game</button>
+        <div>
+            <button id="new-game-button" type="button" class="btn btn-success">New Game</button>
+            <span id="wrong-guesses">Wrong Guesses: 0</span>
+        </div>
     </div>
     <div id="game-board">
         <div id="row1" class="card-row">
@@ -56,6 +61,18 @@
             <div id="card10"></div>
             <div id="card11"></div>
             <div id="card12"></div>
+        </div>
+        <div id="row4" class="card-row">
+            <div id="card13"></div>
+            <div id="card14"></div>
+            <div id="card15"></div>
+            <div id="card16"></div>
+        </div>
+        <div id="row5" class="card-row">
+            <div id="card17"></div>
+            <div id="card18"></div>
+            <div id="card19"></div>
+            <div id="card20"></div>
         </div>
     </div>
 

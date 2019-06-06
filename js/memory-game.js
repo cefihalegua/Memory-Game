@@ -1,7 +1,8 @@
-//randomly choosing pictures and distributing the cards
 var numberOfCards = 12; //total number of cards in the board
 var numberOfPictures = 10; //number of different pictures to choose cards
 var pictures = [];
+
+//randomly choosing pictures
 $("#new-game-button").on("click", newGameButton);
 function choosingPictures() {
     var picturesArray = [];
@@ -17,6 +18,8 @@ function choosingPictures() {
     }
     distributeCards(chosenPictures);
 }
+
+//randomly distributing cards
 function distributeCards(chosenPictures) {
     var pictureDistributionOrder = [];
     for (let k = 0; k < numberOfCards; k++) {
@@ -42,7 +45,6 @@ function distributeCards(chosenPictures) {
         $("#card" + (n + 1)).append(back);
     }
 }
-choosingPictures();
 
 //flipping card when cliked on
 var openCardCount = 0;
@@ -52,6 +54,8 @@ var card2Front;
 var card2Back;
 var clickConstant = true;
 var correctGuesses = 0;
+var wrongGuesses = 0;
+var wrongGuessesDisplay = $("#wrong-guesses");
 function flipCard() {
     if (clickConstant) {
         if (openCardCount == 0) {
@@ -85,6 +89,7 @@ function compareOpenCards(card1Front, card1Back, card2Front, card2Back) {
     var firstCardImageSource = document.getElementById(card1Front).getAttribute("src");
     var secondCardImageSource = document.getElementById(card2Front).getAttribute("src");
     if (firstCardImageSource != secondCardImageSource) {
+        wrongGuesses++;
         clickConstant = false;
         setTimeout(noCorrectGuess, 1000);
     }
@@ -99,16 +104,24 @@ function compareOpenCards(card1Front, card1Back, card2Front, card2Back) {
         document.getElementById(card2Front).setAttribute("class", "no-show");
         document.getElementById(card1Back).setAttribute("class", "card");
         document.getElementById(card2Back).setAttribute("class", "card");
+        wrongGuessesDisplay.text("Wrong Guesses: " + wrongGuesses);
         clickConstant = true;
     }
     function afterWinningTheGame() {
+        wrongGuessesDisplay.text("You WON!");
         document.getElementById("button-for-modal").click();
         document.getElementById("new-game-modal").addEventListener("click", newGameButton);
     }
 }
 function newGameButton() {
+    wrongGuesses = 0;
+    wrongGuessesDisplay.text("Wrong Guesses: " + wrongGuesses);
     for (let k = 0; k < numberOfCards; k++) {
         $("#card" + (k + 1)).empty();
     }
     choosingPictures();
 }
+
+
+
+choosingPictures(); //starting the game automatically

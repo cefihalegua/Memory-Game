@@ -25,3 +25,10 @@ body {
     margin-top: 10px;
     margin-left: 10px;
 }
+#wrong-guesses {
+    color: red;
+    font-size: 24px;
+    float: right;
+    margin-top: 10px;
+    margin-right: 10px;
+}
