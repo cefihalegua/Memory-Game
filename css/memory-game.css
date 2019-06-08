@@ -12,9 +12,6 @@ body {
     max-width: 22vw;
     margin: 5px;
 }
-.show{
-    display: inline-block;
-}
 .no-show {
     display: none;
 }
